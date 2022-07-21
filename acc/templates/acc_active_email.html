@@ -1,0 +1,10 @@
+
+{% autoescape off %}  
+Witaj {{ user.username }},  
+Pozostał ostatni krok! Kliknij w link aktywacyjny aby potwierdzić swoją rejestrację 
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %},
+jeżeli to nie ty, zignoruj tę wiadomość.
+Pozdrawiamy
+Zespół eventinfo.pl
+
+{% endautoescape %}  

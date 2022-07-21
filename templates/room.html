@@ -1,0 +1,471 @@
+
+{% load static %}
+{% block head %}
+<!-- bootstrap -->
+<script src="https://kit.fontawesome.com/9fb274380a.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- CSS FILES -->
+<link rel="stylesheet" href="{% static 'css/av/fontawesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/av/swiper.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/av/fancybox.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/av/bootstrap.min.css' %}">
+
+<style>
+#wyslij {
+  background-color: #F8669E;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Mont";
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  color: #000F23;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+  background-color: rgba(58,48,137,1) ;
+}
+h6, h2{
+  color: #fff;
+}
+a {
+  text-decoration: none;
+}
+.offcanvas {
+  background-color:  #000F23;
+}
+.offcanvas-title{
+  color: #fff;
+}
+.offcanvas a{
+color: #ddd;
+}
+
+.offcanvas h6{
+  color: #ddd;
+  }
+
+  .offcanvas p{
+    color: #ddd;
+    }
+
+
+
+  .pinky{
+    color: #f8669e
+  }
+  .bg-blue{
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(58,48,137,0.8) ;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+  }
+  
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  padding: 25px 0;
+}
+.navbar .logo {
+  display: inline-block;
+}
+.navbar .logo a {
+  display: block;
+}
+.navbar .logo a img {
+  height: 58px;
+}
+.navbar .site-menu {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  margin: 0 auto;
+}
+.navbar .site-menu ul {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.navbar .site-menu ul li {
+  display: inline-block;
+  margin: 0;
+  padding: 0 14px;
+  list-style: none;
+  position: relative;
+}
+.navbar .site-menu ul li a {
+  display: inline-block;
+  color: #fff;
+  font-weight: 600;
+  position: relative;
+}
+.navbar .site-menu ul li a:before {
+  content: "";
+  width: 0;
+  height: 3px;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  background: #F8669E;
+  -webkit-transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  -ms-transition: all .25s ease-in-out;
+  -o-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
+}
+.navbar .site-menu ul li a:hover {
+  text-decoration: none;
+}
+.navbar .site-menu ul li a:hover:before {
+  width: 100%;
+  left: 0;
+}
+.navbar .search-button {
+  display: inline-block;
+  cursor: pointer;
+}
+.navbar .more-button {
+  margin-left: 30px;
+  cursor: pointer;
+}
+.navbar .hamburger-menu {
+  margin-left: 30px;
+  cursor: pointer;
+  display: none;
+}
+.navbar .navbar-button {
+  margin-left: 30px;
+}
+.navbar .navbar-button a {
+  height: 58px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 30px;
+  border: 2px solid #F8669E;
+  border-radius: 58px;
+  color: #fff;
+  font-weight: 600;
+  -webkit-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  -moz-transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  overflow: hidden;
+}
+.navbar .navbar-button a:hover {
+  text-decoration: none;
+}
+.navbar .navbar-button a:hover:before {
+  transform: scaleY(1);
+  transform-origin: center bottom;
+}
+.navbar .navbar-button a:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  transform: scaleY(0);
+  transform-origin: center top;
+  background: #F8669E;
+  transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.navbar .navbar-button a figure {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-right: 14px;
+  padding-right: 15px;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+}
+.navbar .navbar-button a figure img {
+  height: 24px;
+}
+
+.navbar {
+  width: 100%;
+}
+.navbar.dark {
+  background: #3A3089;
+}
+.navbar.navbar-light {
+  background: transparent;
+}
+.navbar.unpinned {
+  transform: translate3d(0, -100%, 0);
+  transition-delay: 0s;
+}
+.navbar.pinned {
+  transition-delay: 0s;
+}
+
+  #forum{
+    padding-top: 10vh;
+  }
+  #display{
+    padding-top: 10vh;
+    background-color: rgba(255,255,255,0.8);
+    box-shadow: 0px 40px 20px 0px rgba(0,0,0,0.2);
+
+  }
+  #form-container{
+    padding-top: 2%;
+    padding-bottom: 5%;
+    width: 100%;
+  }
+  #post-form{
+width: 100%;
+  }
+  .time-left{
+    color: gray;
+    opacity: 0.5;
+  }
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+    button[type=submit] {
+    width: 100%;
+
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    button[type=submit]:hover {
+    background-color: #000f23;
+    }
+.section-bg{
+  z-index: -2;
+}
+
+/* PAGE HEADER */
+.page-header {
+  width: 100%;
+  height: 520px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 122px;
+  background-size: contain !important;
+  background-position: bottom center !important;
+  background-repeat: no-repeat !important;
+  position: relative;
+}
+.page-header:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #3A3089 !important;
+  z-index: -1;
+}
+.page-header .inner {
+  width: 100%;
+  display: block;
+  color: #fff;
+  
+}
+.page-header .inner h6 {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  font-family: 'Brookline';
+  letter-spacing: 1px;
+  color: #F8669E;
+}
+.page-header .inner h2 {
+  width: 100%;
+  display: block;
+  margin: 0;
+  font-size: 84px;
+  font-weight: 800;
+  padding-right: 40%;
+}
+
+</style>
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+
+<script>
+  $(document).ready(function(){
+  
+  setInterval(function(){
+      $.ajax({
+          type: 'GET',
+          url : "/getMessages/{{room}}/",
+          success: function(response){
+              console.log(response);
+              $("#display").empty();
+              for (var key in response.messages)
+              {
+                  var temp="<div class='container darker'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
+                  $("#display").append(temp);
+              }
+          },
+          error: function(response){
+              alert('An error occured')
+          }
+      });
+  },1000);
+  })
+  </script>
+{% endblock %}
+
+{% block content %}
+
+<div class="smooth-scroll">
+  <!-- end search-box -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="logo"> <a href="{% url 'home' %}" class="text-white"> eventinfo.pl</a> </div>
+      <!-- end logo -->
+      <div class="site-menu">
+        <ul>
+          <li><a href="about.html"><i class="fa-brands fa-facebook"></i></a></li>
+          <li><a href="events.html"><i class="fa-brands fa-facebook-messenger"></i></a></li>
+          <li><a href="speakers.html"><i class="fa-brands fa-whatsapp"></i></a></li>
+          <li><a href="news.html"><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-phone"></i> 05505550555</a></li>
+        </ul>
+      </div>
+      <!-- end site-menu -->
+
+      <!-- end search-button -->
+
+      <!-- end more-button -->
+
+      <!-- end hamburger-menu -->
+      <div class="navbar-button">    <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        <i class="fa-solid fa-bars"></i>
+      </a> </div>
+      <!-- end navbar-button --> 
+    </div>
+    <!-- end container --> 
+  </nav>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+      <div class="dropdown mt-3">
+        <ul>
+          <li><a href="{% url 'home'%}">Strona domowa</a></li>
+          <li><a href="{% url 'kalendarz' %}">Kalendarz imprez</a></li>
+          <li><a href="#">Archiwum</a></li>
+          <li><a href="{% url 'home' %}#kontakt">Kontakt</a></li>
+        </ul>
+        {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% url 'profil' user.profil.pk %}">Profil</a></li>
+            <li><a href="{% url 'logout'%}">Wyloguj się</a></li>
+        </ul>
+        {% else %}
+       <ul>
+        <li><a href="{% url 'reg' %}">Zarejestruj się</a></li>
+        <li><a href="{% url 'login' %}">Zaloguj się</a></li>
+       </ul>
+       {% endif %}
+
+<div style="padding-top:15%; padding-left: 10%;">
+<h6>Pełna nazwa firmy</h6>
+<p>adres siedziby</p>
+<p>regon/nip jeżeli ma być</p>
+<p>menu ma przejąć formę stopki.</p>
+</div>
+      </div>
+    </div>
+  </div>
+<!-- koniec nawigacji -->
+
+      <header class="page-header">        <div class="container">
+          <div class="inner">
+            <h6>Forum wydarzenia</h6>
+            <h2>{{ room }}</h2>  </div>
+          <!-- end inner --> 
+        </div>
+        <!-- end container --> 
+      </header>
+      <span class="section-bg" data-background="{% static 'images/section-bg02.png'%}" data-scroll data-scroll-speed="2"></span>
+<section id="forum">
+  <span class="section-bg" data-background="images/section-bg04.png" data-scroll data-scroll-speed="-4"></span>
+  <span class="section-bg" data-background="{% static 'images/zosia.png' %}" data-scroll data-scroll-speed="4"></span>
+
+
+<div id="display" class="container">
+
+<!-- <div class="container darker">
+  <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
+  <span class="time-left">20th, April 2021</span>
+</div> -->
+
+</div>
+
+<div class="container" id="form-container">
+
+
+  <form id="post-form">
+      {% csrf_token %}
+      <input type="hidden" name="username" id="username" value="{{username}}"/>
+      <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
+      <input type="text" name="message" id="message" width="100px" />
+      <button type="submit" id="wyslij"><i class="fa-solid fa-paper-plane"></i></button>
+  </form>
+</div>
+</section>
+</div>
+{% endblock %}
+
+
+
+{% block script %}
+<script type="text/javascript">
+  $(document).on('submit','#post-form',function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type:'POST',
+      url:'/send',
+      data:{
+          username:$('#username').val(),
+          room_id:$('#room_id').val(),
+          message:$('#message').val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function(data){
+         //alert(data)
+      }
+    });
+    document.getElementById('message').value = ''
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+
+{% endblock %}
+

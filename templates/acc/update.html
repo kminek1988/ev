@@ -1,0 +1,49 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+<style>
+    body {
+        overflow: scroll!important;
+        background-color: #3a3089;
+    }
+    #update{
+         
+         height: 120vh;
+         padding-top: 10vh;
+    }
+    .btn-outline-light{
+        background-color: #f8669e;
+    }
+    label {
+        color: #fff;
+    }
+    .section-bg {
+        z-index: -1;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<section id="update">
+    <span class="section-bg" data-background="{% static 'images/zosia.png' %}" data-scroll data-scroll-speed="4"></span>
+    
+    <div class="container">
+        <div class="section-title ">
+            <h1 class="text-white">
+              Edytuj swoje dane
+            </h1>
+        </div>
+ 
+        <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-outline-light">
+        Potwierdź
+    </button>
+        </form>
+    
+    </div>
+
+</section>
+{% endblock %}

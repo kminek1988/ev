@@ -1,0 +1,202 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    #profil{
+     
+        height: 100vh;
+    }
+    .inline li{
+        list-style: none;
+        display:inline!important;
+        color:#f8669e;
+    }
+    .inline a{
+        list-style: none;
+        display:inline!important;
+        color:#f8669e;
+    }
+    .btn{
+        background-color: #f8669e;
+    }
+</style>
+<div class="section-wrapper" data-scroll-section>
+    <header class="page-header">
+              <div class="container">
+        <div class="inner">
+          <h6>Profil użytkownika:</h6>
+          <h2>{{ user }}</h2>
+        </div>
+        <ul class="inline">
+            <li>
+                <a href="{{user.profil.pk}}/update">Edytuj dane/</a>
+            </li>
+            <li>
+               <a href="{{user.profil.pk}}/create-region"> Twoje regiony/</a>
+            </li>
+            <li><a href="{{user.profil.pk}}/create-region/create-miasto"> Twoje miasta/</a>/</li>
+            <li><a href="{{user.profil.pk}}/create-region/create-miasto/create-preferencje"> Twoje rodzaje/</a>/</li>
+        </ul>
+        <!-- end inner --> 
+      </div>
+      <!-- end container --> 
+    </header>
+
+
+
+
+    <section class="content-section">
+		<span class="section-bg" data-background="{% static 'images/section-bg04.png' %}" data-scroll data-scroll-speed="1"><img src="{{user.profil.img.url}}" alt="">
+        <div class="container">
+            <p>{{ user.profil.name|default:'' }} {{ user.profil.surname}}</p>
+            <p>{{user.profil.tel}}</p>
+            <p>{{user.profil.email}}</p>
+        </div>
+        </span>
+		<!-- end section-bg -->
+      <div class="container-fluid">
+        <div class="row">
+          <!-- end col-8 -->
+          <div class="col-lg-8 offset-lg-4">
+            <aside class="sidebar">
+              <div class="widget">
+                <h6 class="widget-title">Wydarzenia, na które się wybierasz:</h6>
+               <div class="row">
+                {% for event in imprezy %}
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{event.plakat.url}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{event.name}}</h5>
+                      <p class="card-text">{{event.start}}</p>
+                      <a href="{% url 'event' event.pk %}" class="btn btn-outline-light">Szczegóły</a>
+                   <form method="post">
+                    {% csrf_token %}
+                    <button value="{{event.id}}"type="submit" name="usun"><i class="fa-solid fa-trash-can"></i></button>
+                   </form>
+                    </div>
+                  </div>
+                {% endfor %}
+
+               </div>
+            
+
+     
+              </div>
+              <!-- end widget -->
+              <div class="widget">
+                <h6 class="widget-title">Najbardziej trafione wydarzenia:</h6>
+               <div class="row">
+                {% for event in najlepsze %}
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{event.plakat.url}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{event.name}}</h5>
+                      <p class="card-text">{{event.start}}</p>
+                      <p class="card-text">{{event.miasto}}</p>
+                      <p class="card-text">{{event.rodzaj}}</p>
+
+
+                      <a href="{% url 'event' event.pk %}" class="btn btn-outline-light">Szczegóły</a>
+                    </div>
+                  </div>
+                {% endfor %}
+
+               </div>
+            
+                </ul>
+     
+              </div>
+              <!-- end widget -->
+
+
+              <!-- end widget --> 
+            </aside>
+            <!-- end sidebar --> 
+          </div>
+          <!-- end col-4 --> 
+          <div class="sidebar">
+            <div class="widget">
+                <h6 class="widget-title">Wydarzenia według miasta:</h6>
+               <div class="row">
+                {% for event in wg_miasta %}
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{event.plakat.url}}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{event.name}}</h5>
+                      <p class="card-text">{{event.start}}</p>
+                      <p class="card-text">{{event.miasto}}</p>
+
+                      <a href="{% url 'event' event.pk %}" class="btn btn-outline-light">Szczegóły</a>
+                    </div>
+                  </div>
+                {% endfor %}
+
+               </div>
+            
+                </ul>
+     
+              </div>
+          </div>
+<div class="sidebar">
+    <div class="widget">
+        <h6 class="widget-title">Wydarzenia według zainteresowań:</h6>
+       <div class="row">
+        {% for event in wg_zainteresowan %}
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{event.plakat.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{event.name}}</h5>
+              <p class="card-text">{{event.start}}</p>
+              <p class="card-text pink">{{event.rodzaj}}</p>
+
+              <a href="{% url 'event' event.pk %}" class="btn btn-outline-light">Szczegóły</a>
+            </div>
+          </div>
+        {% endfor %}
+
+       </div>
+    
+        </ul>
+
+      </div>
+</div>
+<div class="sidebar">
+    <div class="widget">
+      <h6 class="widget-title">Wydarzenia archiwalne:</h6>
+     <div class="row">
+      {% for event in imprezy %}
+      {% if event.archiwum == True %}
+      <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{event.plakat.url}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{event.name}}</h5>
+            <p class="card-text">{{event.start}}</p>
+            <a href="{% url 'event' event.pk %}" class="btn btn-outline-light">Szczegóły</a>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+  
+       {% if user.profil.sex == 'żeńska'%}
+       <p>Jeszcze nie byłaś na naszej imprezie</p>
+       {% elif user.profil.sex == 'męska' %}
+<p>jeszcze nie byłeś na naszej imprezie</p>
+       {% endif %}
+
+        
+
+
+     </div>
+        </div>
+        <!-- end row --> 
+      </div>
+
+
+
+
+
+
+
+    </div>
+{% endblock %}

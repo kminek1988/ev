@@ -1,0 +1,118 @@
+<!doctype html>
+{%  load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Event info</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- awsome icons -->
+    <script src="https://kit.fontawesome.com/9fb274380a.js" crossorigin="anonymous"></script>
+
+    <!-- moje style -->
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/av/style.css' %}">
+
+ 
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- nawigacja -->
+<div class="container">
+    <nav class="navbar navbar-light bg-transparent">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'home' %}">Eventinfo.pl</a>
+          <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+            <i class="fa-solid fa-bars"></i>
+          </a>
+        </div>
+      </nav>
+
+</div>
+
+      
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+
+          <div class="dropdown mt-3">
+            <ul>
+              <li><a href="{% url 'home'%}">Strona domowa</a></li>
+            </ul>
+            {% if user.is_authenticated %}
+            <ul>
+                <li><a href="#">Profil</a></li>
+                <li><a href="{% url 'logout'%}">Wyloguj się</a></li>
+            </ul>
+            {% else %}
+           <ul>
+            <li><a href="{% url 'reg' %}">Zarejestruj się</a></li>
+            <li><a href="{% url 'login' %}">Zaloguj się</a></li>
+           </ul>
+           {% endif %}
+          </div>
+        </div>
+      </div>
+    <!-- koniec nawigacji -->
+
+    {% block content %}
+
+    {% endblock %}
+    {% block script %}
+{% endblock script %}
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<!-- intro -->
+<script type="text/javascript">
+const panels=document.querySelectorAll('.panel')
+panels.forEach((panel)=>{//loop on every cards
+    console.log(panel)
+  panel.addEventListener("mouseover",()=>{//add a click event
+    removeActiveClasses()
+    panel.classList.add("active");//when i click i add a class style 'active '
+  })//
+})
+function removeActiveClasses(){
+    panels.forEach((panel)=>{//when i click in other cards i remove active class on the others panel
+        panel.classList.remove("active")
+    })
+}
+    
+</script>
+<!-- rodzaje -->
+<script type="text/javascript">
+let e0 = document.querySelector(".knob-ribbon");
+let e1 = document.querySelector(".line-dot");
+let e2 = document.querySelector(".marge-line");
+let e3 = document.querySelector(".step-dot");
+let e4 = document.querySelector(".info-token");
+let e;
+function myFunction() {
+  e0.style.display = "block";
+  setTimeout(() => {
+    e1.style.display = "block";
+  }, 500);
+  setTimeout(() => {
+    e3.style.display = "block";
+  }, 1000);
+  setTimeout(() => {
+    e2.style.display = "block";
+  }, 1500);
+  setTimeout(() => {
+    e4.classList.add("rotate");
+  }, 2000);
+}
+
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+>
+
+  </body>
+</html>

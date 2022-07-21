@@ -1,0 +1,233 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="section-wrapper" data-scroll-section>
+    <section class="slider">
+      <div class="container">
+        <div class="row">
+            
+          <div class="col-lg-6">
+            <div class="events-slider-content">
+              <div class="swiper-wrapper">
+                {% for event in event_all %}
+                <div class="swiper-slide">
+                  <div class="inner">
+                    <div class="date">
+                      <figure><img src="{% static 'images/icon-date.svg' %}" alt="Image"></figure>
+                      <span>{{event.start}}</span></div>
+                    <!-- end date -->
+                    <h2>{{event.name}}</h2>
+                    <p>{{event.short}}</p>
+                    <a href="{% url 'event' event.pk %}" class="slider-button"> <span class="circle" aria-hidden="true"> <span class="icon arrow"></span> </span> <span class="button-text">SZCZEGÓŁY</span></a>
+                    <div class="location">
+                      <div class="icon"><img src="{% static 'images/icon-location.svg' %}" alt="Image"></div>
+                      <span>{{event.miasto}}</span> </div>
+                    <!-- end location --> 
+                  </div>
+               
+                  <!-- end inner --> 
+                </div>   {% endfor %}
+                <!-- end swiper-slide -->
+
+                <!-- end swiper-slide --> 
+              </div>
+              <!-- end swiper-wrapper --> 
+            </div>
+            <!-- end events-slider-content --> 
+          </div>
+          <!-- end col-6 -->
+          <div class="col-lg-6">
+            <div class="events-slider-images">
+              <div class="swiper-wrapper">
+                {% for event in event_all %}
+                <div class="swiper-slide">
+                  <div class="slide-image" data-background="{{event.plakat.url}}"></div>
+                </div>{% endfor %}
+                <!-- end swiper-slide -->
+         
+              </div>
+              <!-- end swiper-wrapper -->
+              <div class="button-prev"><span class="icon arrow"></span></div>
+              <div class="button-next"><span class="icon arrow"></span></div>
+            </div>
+            <!-- end events-slider-content --> 
+          </div>
+          <!-- end col-6 --> 
+        </div>
+        <!-- end row --> 
+      </div>
+      <!-- end container --> 
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- konferencje -->
+
+<section class="content-section">
+    <span class="section-bg" data-background="{% static 'images/section-bg01.png' %}" data-scroll data-scroll-speed="1"></span>
+    <!-- end section-bg -->
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+          <div data-scroll data-scroll-speed="-0.5">
+        <div class="side-content left">
+          <h6>Co organizujemy?</h6>
+          <h2>Zloty, koncerty, spotkania</h2>
+          <p>Zapraszamy na organizowane przez nas wydarzenia.</p>
+          <p>Można tu coś jeszcze napisać</p>
+          <a href="#" class="custom-button"> <span class="circle" aria-hidden="true"> <span class="icon arrow"></span> </span> <span class="button-text">Wszystkie rodzaje</span></a> </div>
+        <!-- end side-content --> 
+              </div>
+          <!-- end data-scroll -->
+      </div>
+      <!-- end col-6 -->
+      <div class="col-lg-6">
+          <div data-scroll data-scroll-speed="0.5">
+        <figure class="side-image"> <img src="{% static 'images/side-image01.png' %}" alt="Image"> </figure>
+        <!-- end side-image --> 
+              </div>
+           <!-- end data-scroll -->
+      </div>
+      <!-- end col-6 --> 
+    </div>
+    <!-- end row --> 
+  </div>
+  <!-- end container --> 
+</section>
+
+<section class="content-section no-top-spacing">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6">
+            <div data-scroll data-scroll-speed="-0.5">
+          <div class="counter-box">
+<h1>Uczestnik</h1>
+<ul>Dostęp do:
+    <li>forum imprez,</li>
+    <li>najświeższych informacji,</li>
+    <li>tablicy informacyjnej,</li>
+    <li>atrakcji przeznaczonych tylko dla posiadaczy kont</li>
+</ul>
+          </div>
+          <!-- end counter-box --> 
+                </div>
+            <!-- end data-scroll -->
+        </div>
+        <!-- end col-4 -->
+        <div class="col-lg-4 col-md-6">
+            <div data-scroll data-scroll-speed="0.5">
+          <div class="counter-box">
+            <h1>Wystawca</h1>
+            <ul>Opłacalna współpraca
+                <li>na najgłośniejszych wydarzeniach w regionie,</li>
+                <li>wydarzeniach kierowanych do konkretnych grup,</li>
+                <li>wydarzeniach tematycznych,</li>
+
+            </ul>
+          </div>
+          <!-- end counter-box -->
+                </div>
+            <!-- end data-scroll -->
+        </div>
+        <!-- end col-4 -->
+        <div class="col-lg-4 col-md-6">
+            <div data-scroll data-scroll-speed="-1">
+          <div class="counter-box">
+ <h1>Organizator</h1>
+ <ul>Zyskuje
+    <li>pierwszy punkt,</li>
+    <li>drugi,</li>
+    <li>trzeci,</li>
+    <li>te teksty dopracujemy, ale muszę więcej wiedzieć o Pana działalności</li>
+ </ul>
+          </div>
+          <!-- end counter-box --> 
+                </div>
+            <!-- end data-scroll -->
+        </div>
+        <!-- end col-4 --> 
+      </div>
+      <!-- end row --> 
+    </div>
+    <!-- end container --> 
+  </section>
+
+  <header class="page-header"  data-background="{% static 'images/page-header-bg.png' %}">
+    <div class="container">
+      <div class="inner">
+        <h6>Wydarzenia w Twoim zasięgu!</h6>
+        <h2>Kontakt</h2>
+      </div>
+      <!-- end inner --> 
+    </div>
+    <!-- end container --> 
+  </header>
+
+
+
+
+  <section class="content-section no-bottom-spacing" id="kontakt">
+		<span class="section-bg" data-background="{% static 'images/section-bg01.png' %}" data-scroll data-scroll-speed="1"></span>
+		<!-- end section-bg -->
+      <div class="container">
+        <div class="row">
+             <div class="col-lg-6">
+			   <div data-scroll data-scroll-speed="-0.5">
+            <div class="contact-box">
+              <h6>Adres</h6>
+              <p>ul. Przykładowa 64/88</p>
+              <p>41-200 Miejscowość</p>
+            </div>
+            <!-- end contact-box -->
+            <div class="contact-box">
+              <h6>Ogólne zapytania:</h6>
+              <p>Zapraszamy do kontaktu pocztą elektroniczną</p>
+              <a href="callto:+44 (0)20 7862 8740">general@aventer.co.uk</a> </div>
+            <!-- end contact-box -->
+            <div class="contact-box">
+              <h6>Porozmawiajmy</h6>
+              <p>Zachęcamy do rozmowy telefonicznej</p>
+              <a >000-000-000</a> </div>
+            <!-- end contact-box --> 
+             </div>
+			  <!-- end data-scroll -->
+          </div>
+          <!-- end col-6 -->
+          <div class="col-lg-6">
+			   <div data-scroll data-scroll-speed="0.5">
+            <div class="contact-form">
+              <h5>Formularz kontaktowy</h5>
+<form method="post">
+
+  {% include 'contact.html' %}
+</form>
+              <!-- end col-form-label --> 
+            </div>
+            <!-- end contact-form --> 
+				   </div>
+			  <!-- end data-scroll -->
+          </div>
+          <!-- end col-6 --> 
+        </div>
+        <!-- end row --> 
+      </div>
+      <!-- end container --> 
+    </section>
+
+
+
+
+
+
+
+{% endblock %}

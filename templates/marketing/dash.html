@@ -1,0 +1,52 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block head %}
+<style>
+    body{
+        background-color:  #3A3089;
+        overflow: scroll;
+    }
+    #dash{
+        background-color: #fff;
+    }
+</style>
+{% endblock %}
+{% block content %}
+ <!-- end navbar -->
+ <div class="section-wrapper" data-scroll-section>
+    <header class="page-header" data-background="images/page-header-bg.png">
+      <div class="container">
+        <div class="inner">
+
+          <h2>Marketing</h2>
+          <h6><ul>
+            <li>Statystyki</li>
+            <li>Widomość dedykowana</li>
+            <li>Zmiany na stronie</li>
+          </ul></h6>
+        </div>
+        <!-- end inner --> 
+      </div>
+      <!-- end container --> 
+    </header>
+    <!-- end page-header -->
+	<!-- end section-bg -->
+    <section class="content-section">
+
+    {% block statystyka %}
+    
+    {% endblock %}
+    
+      <!-- end container --> 
+    </section>
+    <!-- end content-section -->
+   
+    <!-- end content-section -->
+  
+    <!-- end google-maps -->
+    
+    <!-- end footer --> 
+  </div>
+  <!-- end smooth-scroll --> 
+</div>
+{%  endblock %}

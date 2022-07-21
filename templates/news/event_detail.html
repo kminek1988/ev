@@ -1,0 +1,120 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% load easy_maps_tags %}
+{% block content %}
+<style>
+
+.adres h1{
+  color: #fff;
+}
+#data{
+    padding-top: 5%;
+    padding-bottom: 10%;
+}
+
+.carousel{
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  height: 100%;
+  width:100%;
+  overflow:hidden;
+  top: 100vh;
+  z-index: 1;
+
+}
+.image-container{
+    display:flex;
+    transform: translateX(0);
+    transition:transform 0.5s ease-in-out;
+}
+</style>
+
+<div class="section-wrapper" data-scroll-section>
+    <header class="page-header" data-background="{{event.bg.url}}">
+      <div class="bg-blue">
+
+      </div>
+      <div class="container">
+        <div class="inner">
+          <h6>{{event.start}}, lokalizacja: {{event.miasto}}</h6>
+          <h2>{{event.name}}</h2>
+          <h6>{{event.rodzaj}}</h6>
+          {% if user.is_authenticated %}
+          <button class="btn btn-link"><a href="/{{event.name}}" class="text-white">FORUM WYDARZENIA</a></button>
+          {% if event in profil_event %}
+          <p>*już się wybierasz na to wydarzenie</p>
+          {% else %}
+          <form method="post">
+            {% csrf_token %}
+            <input placeholder="{{ event.name }}" value="{{event.id}}" name="event_id" type="hidden">
+            <button type="submit">Idę!</button>
+          </form> 
+          {% endif %}
+          {% else %}
+          <p>*aby się zapisać na to wydarzenie, musisz się zalogować</p>
+          {% endif %}
+        </div>
+        <!-- end inner --> 
+      </div>
+      <!-- end container --> 
+    </header>
+
+
+
+
+    <section class="content-section">
+		<span class="section-bg" data-background="{% static 'images/section-bg06.png' %}" data-scroll data-scroll-speed="2"></span>
+		<!-- end section-bg -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+			   <div data-scroll data-scroll-speed="0.5">
+            <figure class="image-box"> <img src="{{event.plakat.url}}" alt="Image" class="img-fluid"> </figure>
+            <!-- image-box --> 
+				     </div>
+			  <!-- end data-scroll -->
+          </div>
+          <!-- end col-12 -->
+          <div class="col-xl-10">
+			   <div data-scroll data-scroll-speed="-0.5">
+            <div class="event-detail-box"> <small>{{event.start}} - {{event.end}}</small>
+              <h3>{{event.name}}</h3>
+              <h4 class="pinky">w {{event.w}}</h4>
+  
+              <!-- end infos -->
+              <h2>Opis:</h2>
+              <p>{{event.opis|safe}}</p>
+     
+            </div>
+            <!-- end event-detail-box --> 
+				     </div>
+			  <!-- end data-scroll -->
+          </div>
+          <!-- end col-10 -->
+          <div class="col-lg-12">
+			   <div data-scroll data-scroll-speed="0.5">
+
+            <div class="google-maps">
+                <div class="adres">
+                  <h1>Adres:</h1>
+                <p>{{event.adres|safe}}</p>
+                </div>
+                <iframe src="{{event.mapa}}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <!-- end google-maps --> 
+				   </div>
+			  <!-- end data-scroll -->
+          </div>
+          <!-- end col-12 --> 
+
+        </div>
+        <!-- end row --> 
+      </div>
+      <!-- end container --> 
+    </section>
+
+</div>
+
+
+
+
+{% endblock %}

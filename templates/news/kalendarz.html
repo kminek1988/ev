@@ -1,0 +1,62 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block head %}
+<style>
+  .blue-bg{
+    background-color: #3a3089;
+  }
+  .pad5-bottom{
+    padding-bottom: 5%;
+  }
+  .pad2{
+    padding: 2%;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<header class="page-header" data-background="images/page-header-bg.png">
+  <div class="container">
+    <div class="inner">
+
+      <h2>Kalendarz wydarzeń</h2>
+      <h3 class="pink">Dzisiaj mamy {% now "j  F Y" %}</h3>
+    </div>
+    <!-- end inner --> 
+  </div>
+  <!-- end container --> 
+</header>
+<div class="section-wrapper" data-scroll-section>
+    <section class="content-section" data-background="#F6FAFB">
+		<span class="section-bg" data-background="{% static 'images/section-bg02.png'%}" data-scroll data-scroll-speed="2"></span>
+		<!-- end section-bg -->
+      <div class="container">
+        <div class="row">
+          <!-- end col-12 -->
+          <div class="col-12">
+			  <div data-scroll data-scroll-speed="0.5">
+          {% for event in calendar %}  
+          {% if event.archiwum == False %}
+          <div class="row pad5-bottom">  
+             <div class="col-md-3 blue-bg pad2 text-white">
+              <h5>{{event.miasto}}</h5>
+              <h6>{{event.start}}</h6>
+             </div>
+             <div class="col-md-9">
+              <h2>{{event.name}}</h2>
+              <p>{{event.short}}</p>
+              <a href="{% url 'event' event.pk %}" class="pinky">SZCZEGÓŁY</a>
+             </div>
+              
+            </div>{% endif %}
+            {% endfor %} 
+				   </div>
+			  <!-- end data-scroll -->
+          </div>
+          <!-- end col-12 --> 
+        </div>
+        <!-- end row --> 
+      </div>
+      <!-- end container --> 
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,628 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.drop{
+  backdrop-filter: blur(6px);
+  background-color: rgba(0,0,0,0.2);
+  padding: 5%;
+  
+}
+.drop a {
+  font-size: larger;
+  color:#fff;
+}
+.panel{
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    color:#fff;
+    cursor:pointer;
+    flex:0.5;
+    position:relative;
+    transition:flex 0.7s ease-in;
+    padding: 2%;
+
+    height: 80vh;
+    
+
+
+    
+}
+.panel h3{
+    font-size:24px;
+    position:absolute;
+    font-weight: 900;
+    background-color: rgba(0,0,0,0.5);
+    padding: 2% 45% 5% 5%;
+    top:20px;
+    left:20px;
+    margin:0;
+    opacity:0.5;
+    z-index: 2;
+    
+}
+.panel p {
+  position: absolute;
+  z-index: 5;
+  background-color: rgba(0,0,0,0.8);
+  bottom: 10%;
+  opacity: 0;
+  padding: 5%;
+}
+.panel h4 {
+  position: absolute;
+  z-index: 5;
+  background-color: rgba(0,0,0,0.5);
+  bottom: 50%;
+  opacity: 0;
+  padding: 5%;
+}
+.panel a {
+  position: absolute;
+  z-index: 5;
+  background-color: rgba(0,0,0,0.5);
+  bottom: 0%;
+  left: 0%;
+opacity: 0;
+  padding: 5%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-weight: 900;
+}
+.panel img{
+  filter: grayscale(80%);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  top: 0%;
+  left: 0%;
+}
+
+.panel.active{
+    flex:3;
+}
+.panel.active h3{
+    opacity:1;
+    transition:opacity 0.3s ease-in 0.4s;
+}
+.panel.active h4{
+    opacity:1;
+    transition:opacity 0.3s ease-in 0.4s;
+}
+.panel.active p{
+    opacity:1;
+    transition:opacity 0.3s ease-in 0.4s;
+}
+.panel.active a{
+    opacity:1;
+    transition:opacity 0.3s ease-in 0.4s;
+}
+.panel.active img {
+  filter: grayscale(0%);
+}
+@media (max-width:480px){
+    .container{
+        width:100vw; 
+    }
+    .panel:nth-of-type(4),.panel:nth-of-type(5){
+        display:none;
+    }
+}
+/* rodzaje  */
+#rodzaje {
+  padding-top: 15%;
+}
+.card {
+  color: white;
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1%;
+  padding-bottom: 2%;
+}
+
+.card::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  left: 10px;
+  top: -70px;
+  position: absolute;
+  background: linear-gradient(#00e5ff, #b400fb);
+  animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  background: #333;
+  inset: 3px;
+  border-radius: 8px;
+}
+
+.card .content {
+  z-index: 1;
+}
+.card img {
+  min-width: 300px;
+  height: 300px;
+  padding: 3%;
+}
+/* współpraca */
+
+.container-team {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  max-width: 1140px;
+}
+.content-wrapper {
+  position: absolute;
+  width: 20%;
+  color: #fff;
+}
+
+.wheel {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.line-dot {
+  display: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  border: 5px solid #fff;
+  border-left: none;
+  box-sizing: content-box;
+}
+
+.marge-line {
+  display: none;
+  width: 690px;
+  height: 690px;
+  border-radius: 100%;
+}
+
+.step-dot {
+  display: none;
+  width: 750px;
+  height: 750px;
+  border-radius: 100%;
+}
+
+.info-token {
+  width: 850px;
+  height: 850px;
+  border-radius: 100%;
+}
+
+
+.dot {
+  position: absolute;
+  inset: -18px;
+  text-align: center;
+  transform: rotate(calc(30deg * var(--i)));
+
+}
+.line-dot .dot {
+  animation: expand 0.6s linear;
+}
+.marge-line .dot div {
+  animation: heightmap 0.6s linear;
+}
+
+.line-dot .dot div {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  background: #fff;
+  display: block;
+  margin: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.line-dot .dot div:after {
+  content: "";
+  width: 21px;
+  height: 21px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ccc;
+  transform: translate(-50%, -50%);
+}
+
+.marge-line .dot div {
+  width: 5px;
+  height: 100px;
+  background: #fff;
+  display: block;
+  margin: auto;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.step-dot .dot div {
+  width: 80px;
+  height: 80px;
+  background: #fff;
+  display: block;
+  margin: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ccc;
+  animation: scaling 0.6s linear !important;
+}
+.step-dot div {
+  transform: rotate(calc(-30deg * var(--i)));
+}
+.step-dot .dot div {
+  padding: 10px;
+}
+
+
+.info-token div {
+  width: 400px;
+  height: 120px;
+  background: yellow;
+  display: block;
+  margin: auto;
+  border-radius: 100px;
+  box-shadow: 0 0 10px #ccc;
+  padding: 20px 40px;
+  text-align: left;
+}
+.info-token .dot {
+  transform: rotate(90deg) translate(0px, 0px);
+}
+
+.info-token div {
+  transform: rotate(-90deg) translate(-385px, 0px);
+}
+.rotate .dot {
+  transform: rotate(calc(30deg * var(--i)));
+  transition: 0.6s linear;
+}
+.rotate .dot div {
+  transform: rotate(calc(-30deg * var(--i))) translate(300px, 0px);
+  transition: 0.6s linear;
+  transition-delay: 0.9s;
+  height: 300px;
+
+  
+}
+.uczestnik{
+  height: 500px;
+  padding-top: 5%;
+}
+.knob {
+  width: 330px;
+  height: 330px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #f9f9f9;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: #000;
+}
+.knob ul {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.knob ul li {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform: rotate(calc(30deg * var(--i)));
+  animation: expand 0.6s linear;
+}
+.knob ul li div {
+  width: 85px;
+  height: 40px;
+  background: transparent;
+  display: block;
+  margin: auto;
+  text-align: left;
+}
+
+.knob-content {
+  position: absolute;
+  background: #fff;
+  height: 85%;
+  width: 85%;
+  border-radius: 100%;
+  box-shadow: 9px 8px 10px #0000003b;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+@keyframes expand {
+  from {
+    transform: rotate(calc(0deg * var(--i)));
+  }
+  to {
+    transform: rotate(calc(30deg * var(--i)));
+  }
+}
+
+@keyframes heightmap {
+  from {
+    height: 0;
+  }
+}
+
+@keyframes scaling {
+  from {
+    transform: rotate(calc(-0deg * var(--i))) scale(0);
+  }
+}
+
+
+
+/* karuzela */
+
+
+</style>
+
+
+
+
+
+
+<div class="container section-wrapper" style="padding-top: 10vh;">
+<div class="inner">
+  <h1>Aktualności</h1>
+  
+<div class="row">
+  {% for event in event_all %}
+  <div class="col-md-3 panel active">
+  <div>
+<h3>{{event.name}}</h3>
+<h4>{{event.start}}</h4>
+<p>{{event.short}}</p>
+<a href="{% url 'event' event.pk %}">Szczegóły</a>
+  </div>
+  <img src="{{ event.plakat.url }}" alt="" class="img-fluid">
+  </div>
+  {% endfor %}
+</div>
+</div>
+</div>
+
+
+
+<!-- rodzaje  -->
+<div class="container" id="rodzaje">
+  <div class="row tytul_row">
+<h1>Co organizujemy</h1>
+  </div>
+<div class="row d-flex">
+{% for rodzaj in rodzaje %}
+<div class="col">
+  <div class="card">
+    <div class="content">
+      <h2 class="text-white pad5 text-center">{{ rodzaj.name }}</h2>
+      <img src="{{ rodzaj.img.url }}" class="img-fluid">
+      <p class="text-white pad5">
+        {{ rodzaj.opis}}
+      </p>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div> 
+<!-- koneic row -->
+</div>
+
+<!-- współpraca -->
+<div class="container-team">
+  <div class="content-wrapper">
+    <div class="wheel">
+      <ul class="marge-line">
+        <li class="dot" style="--i:1">
+          <div></div>
+        </li>
+        <li class="dot" style="--i:2">
+          <div></div>
+        </li>
+        <li class="dot" style="--i:3">
+          <div></div>
+        </li>
+        <li class="dot" style="--i:4">
+          <div></div>
+        </li>
+        <li class="dot" style="--i:5">
+          <div></div>
+        </li>
+        <li class="dot" style="--i:6"></li>
+        <li class="dot" style="--i:7"></li>
+        <li class="dot" style="--i:8"></li>
+        <li class="dot" style="--i:9"></li>
+        <li class="dot" style="--i:10"></li>
+        <li class="dot" style="--i:11"></li>
+        <li class="dot" style="--i:12"></li>
+      </ul>
+      <ul class="line-dot">
+        <li class="dot" style="--i:1">
+          <div style="background:#7190FF;"></div>
+        </li>
+
+        <li class="dot" style="--i:3">
+          <div style="background:#62ACE3;"></div>
+        </li>
+
+        <li class="dot" style="--i:5">
+          <div style="background:#1F3664;"></div>
+        </li>
+        <li class="dot" style="--i:6">
+          <div></div>
+        </li>
+
+          <div></div>
+        </li>
+      </ul>
+      <ul class="info-token">
+        <li class="dot" style="--i:1">
+          <div style="background:#7190FF; text-align: center; height: 150px;" class="pad5">
+            <h5 class="pad5 text-center">Uczestnik</h5>
+            <p class="text-white">Już nigdy nie przegapisz naszej imprezy  <a href="{% url 'reg' %}" class="text-white">Zarejestruj się</a></p>
+           
+         
+          </div>
+        </li>
+
+        <li class="dot" style="--i:3">
+          <div style="background:#62ACE3;  text-align: center; height: 150px;" class="pad5">
+            <h5 class="pad5">Wystawca</h5>
+            <p class="text-white" >Zapraszam do współpracy  </p> <a href="#" class="text-white">Kontakt</a>
+          
+          
+          </div>
+        </li>
+
+        <li class="dot" style="--i:5">
+          <div style="background:#1F3664; text-align: center; height: 150px;">
+            <h3>Organizator</h3>
+            <p>Zapraszam do kontaktu</p>
+            <a href="#" class="text-white">Kontakt</a>
+          </div>
+        </li>
+      </ul>
+      <ul class="step-dot">
+        <li class="dot" style="--i:1">
+          <div style="color:#7190FF">
+         
+            <h2>01</h2>
+          </div>
+        </li>
+
+        <li class="dot" style="--i:3">
+          <div style="color:#63ACE4">
+      
+            <h2>02</h2>
+          </div>
+        </li>
+
+        <li class="dot" style="--i:5">
+          <div style="color:#1F3563">
+          
+            <h2>03</h2>
+          </div>
+        </li>
+        <li class="dot" style="--i:6"></li>
+        <li class="dot" style="--i:7"></li>
+        <li class="dot" style="--i:8"></li>
+        <li class="dot" style="--i:9"></li>
+        <li class="dot" style="--i:10"></li>
+        <li class="dot" style="--i:11"></li>
+        <li class="dot" style="--i:12"></li>
+      </ul>
+    </div>
+    <div class="knob">
+      <ul class="knob-ribbon">
+        <li style="--i:1">
+          <div style="background:#7190FF;"></div>
+        </li>
+        <li style="--i:2">
+          <div style="background:#88F2B9;"></div>
+        </li>
+        <li style="--i:3">
+          <div style="background:#62ACE3;"></div>
+        </li>
+        <li style="--i:4">
+          <div style="background:#2E50E9;"></div>
+        </li>
+        <li style="--i:5">
+          <div style="background:#1F3664;"></div>
+        </li>
+        <li style="--i:6">
+          <div style="background: #fff;"></div>
+        </li>
+        <li style="--i:7">
+          <div></div>
+        </li>
+        <li style="--i:8">
+          <div></div>
+        </li>
+        <li style="--i:9">
+          <div></div>
+        </li>
+        <li style="--i:10">
+          <div></div>
+        </li>
+        <li style="--i:11">
+          <div></div>
+        </li>
+        <li style="--i:12">
+          <div></div>
+        </li>
+      </ul>
+      <div class="knob-content">
+        <h1>Rodzaje kont</h1>
+      
+        <button href="" onclick="myFunction()" class="btn btn-outline-dark">Naciśnij mnie</button>
+        <div class="under"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+<!-- slider  -->
+<!-- koniec slider -->
+{% endblock %}
+{% block script %}
+
+{% endblock%}

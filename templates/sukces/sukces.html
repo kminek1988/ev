@@ -1,0 +1,25 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block content %}
+<style>
+.conf{
+    background-color: #3a3089;
+    padding-top: 15%;
+    height: 100vh;
+
+}
+h3{
+    color: #f8669e;
+}
+</style>
+<div class="conf">
+<div class="container">
+    <h1 class="text-white">Rejestracja zakończyła się powodzeniem</h1>
+    <h2 class="text-white">Życzymy udanej zabawy na naszych eventach i portalu</h2>
+    <h3>Pozdrwiamy</h3>
+    <h3>Zespół eventinfo.pl</h3>
+    <a href="{% url 'login' %}" class="text-white">Zaloguj się</a>
+
+</div>
+</div>
+{% endblock %}
